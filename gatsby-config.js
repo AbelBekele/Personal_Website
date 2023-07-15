@@ -1,15 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: 'Tania Rascia',
+    title: 'Abel Bekele',
     author: {
-      name: 'Tania Rascia',
+      name: 'Abel Bekele',
     },
     pathPrefix: '/',
-    siteUrl: 'https://www.taniarascia.com',
+    siteUrl: 'https://www.abelbekele.com',
     description:
       'Software engineer and open-source creator. This is my digital garden.',
-    feedUrl: 'https://www.taniarascia.com/rss.xml',
-    logo: 'https://www.taniarascia.com/logo.png',
+    feedUrl: 'https://www.abelbekele.com/rss.xml',
+    logo: 'https://www.abelbekele.com/logo.png',
   },
   plugins: [
     // ===================================================================================
@@ -21,8 +21,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Tania Rascia',
-        short_name: 'Tania Rascia',
+        name: 'Abel Bekele',
+        short_name: 'Abel Bekele',
         description:
           'Software engineer and open source creator. This is my digital garden.',
         start_url: '/',
@@ -58,7 +58,7 @@ module.exports = {
                   guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
                   custom_elements: [
                     { 'content:encoded': edge.node.html },
-                    { author: 'hello@taniarascia.com' },
+                    { author: 'hello@abelbekele.com' },
                   ],
                 })
               })
