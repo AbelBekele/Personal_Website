@@ -18,15 +18,15 @@ export default function TagTemplate({ data, pageContext }) {
   const message = totalCount === 1 ? ' post tagged:' : ' posts tagged:'
 
   return (
-    <div>
+    <>
       <Helmet title={`Posts tagged: ${tag} | ${config.siteTitle}`} />
       <SEO />
 
       <SidebarLayout>
         <Hero highlight={totalCount} subTitle={message} title={tag} />
-        <Posts data={simplifiedPosts} showYears />
+        <Posts data={simplifiedPosts} />
       </SidebarLayout>
-    </div>
+    </>
   )
 }
 

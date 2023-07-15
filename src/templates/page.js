@@ -4,35 +4,28 @@ import Helmet from 'react-helmet'
 
 import { Layout } from '../components/Layout'
 import { SEO } from '../components/SEO'
-import { AboutSidebar } from '../components/AboutSidebar'
+import { Hero } from '../components/Hero'
 import config from '../utils/config'
 
 export default function PageTemplate({ data }) {
   const post = data.markdownRemark
-  const { title, description, slug } = post.frontmatter
+  const { title, description } = post.frontmatter
 
   return (
-    <div>
+    <>
       <Helmet title={`${title} | ${config.siteTitle}`} />
       <SEO customDescription={description} />
       <div className="container">
-        <div className="grid">
-          <div className="article-content">
-            <div className="hero">
-              <h1>{title}</h1>
-            </div>
-            <section className="segment small">
-              <div
-                className="post-content"
-                dangerouslySetInnerHTML={{ __html: post.html }}
-              />
-            </section>
-          </div>
-
-          {slug.includes('me') && <AboutSidebar />}
-        </div>
+        <Hero title={title} />
       </div>
-    </div>
+
+      <section className="small segment container">
+        <div
+          className="post-content medium width"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
+      </section>
+    </>
   )
 }
 

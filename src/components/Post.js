@@ -1,21 +1,15 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import { getFormattedDate } from '../utils/helpers'
-
-export const Post = ({ node, prefix, newspaper }) => {
+export const Post = ({ node, prefix }) => {
   let formattedDate
 
   if (node.date) {
-    if (!newspaper) {
-      const dateArr = node.date.split(' ')
-      dateArr.pop()
+    const dateArr = node.date.split(' ')
+    dateArr.pop()
 
-      dateArr[0] = dateArr[0].slice(0, 3)
-      formattedDate = dateArr.join(' ').slice(0, -1)
-    } else {
-      formattedDate = getFormattedDate(node.date)
-    }
+    dateArr[0] = dateArr[0].slice(0, 3)
+    formattedDate = dateArr.join(' ').slice(0, -1)
   }
 
   return (

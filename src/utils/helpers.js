@@ -39,8 +39,7 @@ export function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-export function appendComments() {
-  const commentDiv = document.getElementById('append-comments-here')
+export function appendComments(commentBox) {
   const commentScript = document.createElement('script')
   const theme = localStorage.getItem('theme')
 
@@ -51,25 +50,13 @@ export function appendComments() {
   commentScript.setAttribute('id', 'utterances')
   commentScript.setAttribute(
     'theme',
-    theme === 'dark' ? 'github-dark' : 'github-light'
+    theme === 'dark' ? 'dark-blue' : 'github-light'
   )
   commentScript.setAttribute('crossorigin', 'anonymous')
 
-  if (!commentDiv.firstChild) {
-    commentDiv.appendChild(commentScript)
+  if (commentBox && commentBox.current) {
+    commentBox.current.appendChild(commentScript)
   } else {
-    console.error('Error adding utterances comments')
+    console.log(`Error adding utterances comments on: ${commentBox}`)
   }
-}
-
-export function getFormattedDate(date) {
-  const dateArr = date.split(' ')
-  if (dateArr[1].startsWith('0')) {
-    dateArr[1] = dateArr[1].slice(1, 2)
-  } else {
-    dateArr[1] = dateArr[1].slice(0, 2)
-  }
-  dateArr[1] += ','
-
-  return dateArr.join(' ')
 }

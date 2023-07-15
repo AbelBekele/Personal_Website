@@ -27,11 +27,11 @@ export default function Projects() {
       .then((data) => {
         setRepos(data)
       })
-      .catch((err) => console.error(err))
+      .catch((err) => console.log(err))
   }, [])
 
   return (
-    <div>
+    <>
       <Helmet title={`${title} | ${config.siteTitle}`} />
       <SEO />
       <div className="container">
@@ -73,13 +73,13 @@ export default function Projects() {
                   </div>
                   <div className="links anchored">
                     {project.writeup && (
-                      <Link className="button small" to={project.writeup}>
+                      <Link className="button" to={project.writeup}>
                         Article
                       </Link>
                     )}
                     {project.url && (
                       <a
-                        className="button small flex"
+                        className="button flex"
                         href={project.url}
                         target="_blank"
                         rel="noreferrer"
@@ -88,7 +88,7 @@ export default function Projects() {
                       </a>
                     )}
                     <a
-                      className="button small flex"
+                      className="button flex"
                       href={`https://github.com/taniarascia/${project.slug}`}
                       target="_blank"
                       rel="noreferrer"
@@ -102,7 +102,7 @@ export default function Projects() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   )
 }
 

@@ -2,8 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 
-import { getFormattedDate, slugify } from '../utils/helpers'
-import me from '../../content/images/tania2020small.jpg'
+import { slugify } from '../utils/helpers'
 
 export const PostSidebar = ({
   tags = [],
@@ -12,7 +11,6 @@ export const PostSidebar = ({
   thumbnail,
 }) => {
   const category = categories?.filter((category) => category !== 'Highlight')
-  const formattedDate = getFormattedDate(date)
 
   return (
     <aside className="post-sidebar">
@@ -22,35 +20,20 @@ export const PostSidebar = ({
         </div>
       )}
       <div className="post-sidebar-card">
-        <h2>About me</h2>
-        <img src={me} alt="Tania" className="sidebar-avatar" />
-        <p>
-          Hello and thanks for visiting! My name is{' '}
-          <Link to="/me">Tania Rascia</Link>, and this is my website and digital
-          garden. 🌱
-        </p>
-        <p>
-          I'm a software developer who creates open-source projects and writes
-          about code, design, and life. This site is and has always been free of
-          ads, trackers, social media, affiliates, and sponsored posts.
-        </p>
-      </div>
-
-      <div className="post-sidebar-card">
-        <h2>Post Details</h2>
+        <h2>Details</h2>
         <ul>
-          <li>Published {formattedDate}</li>
+          <li>Published {date}</li>
         </ul>
 
         {category && (
-          <div>
+          <>
             <h2>Category</h2>
             <ul>
               <li>
                 <Link to={`/categories/${slugify(category)}`}>{category}</Link>
               </li>
             </ul>
-          </div>
+          </>
         )}
 
         <h2>Tags</h2>
@@ -71,20 +54,18 @@ export const PostSidebar = ({
       </div>
 
       <div className="post-sidebar-card">
-        <h2>Newsletter</h2>
+        <h2>About me</h2>
         <p>
-          Get updates when I write something new! No spam, I respect your inbox.
+          Hello and thanks for visiting! My name is Tania Rascia, and this is my
+          website and digital garden.
         </p>
         <p>
-          <a
-            href="https://taniarascia.substack.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button highlighted"
-          >
-            Subscribe to the Newsletter
-          </a>
+          I'm a software developer by day, and I've written hundreds of articles
+          and tutorials about things that interest me in my spare time. This
+          site is and has always been free of ads, trackers, social media,
+          affiliates, and sponsored posts.
         </p>
+        <p>I hope you enjoy the post and have a nice day.</p>
       </div>
     </aside>
   )

@@ -1,21 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
-import Img from 'gatsby-image'
 
 import { Layout } from '../components/Layout'
 import { SEO } from '../components/SEO'
 import { PostSidebar } from '../components/PostSidebar'
 import { Comments } from '../components/Comments'
 import config from '../utils/config'
+import { appendComments } from '../utils/helpers'
 
 export default function PostTemplate({ data }) {
   const post = data.markdownRemark
-  const { tags, categories, title, date, thumbnail, comments_off } =
-    post.frontmatter
+  const { tags, categories, title, date, thumbnail } = post.frontmatter
+  const commentBox = React.createRef()
+
+  useEffect(() => {
+    appendComments(commentBox)
+  }, [commentBox])
 
   return (
-    <div>
+    <>
       <Helmet title={`${post.frontmatter.title} | ${config.siteTitle}`} />
       <SEO postPath={post.fields.slug} postNode={post} postSEO />
 
@@ -23,11 +27,6 @@ export default function PostTemplate({ data }) {
         <div className="grid">
           <div className="article-content">
             <div className="post-header medium width">
-              {thumbnail && (
-                <div className="mobile-post-image">
-                  <Img fixed={thumbnail.childImageSharp?.fixed} />
-                </div>
-              )}
               <h1>{title}</h1>
             </div>
             <section className="segment small">
@@ -38,30 +37,10 @@ export default function PostTemplate({ data }) {
               />
             </section>
 
-            <section id="comments" className="segment">
-              <div className="card single">
-                <h3>Newsletter</h3>
-                <p className="text-medium">
-                  If you liked this post, sign up to get updates in your email
-                  when I write something new! No spam ever.
-                </p>
-                <a
-                  href="https://taniarascia.substack.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="button highlighted"
-                >
-                  Subscribe to the Newsletter
-                </a>
-              </div>
+            <section id="comments" className="segment comments">
+              <h3>Comments</h3>
+              <Comments commentBox={commentBox} />
             </section>
-
-            {!comments_off && (
-              <section id="comments" className="segment comments">
-                <h3>Comments</h3>
-                <Comments />
-              </section>
-            )}
           </div>
 
           <PostSidebar
@@ -72,7 +51,7 @@ export default function PostTemplate({ data }) {
           />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
@@ -92,7 +71,6 @@ export const pageQuery = graphql`
         tags
         categories
         description
-        comments_off
         thumbnail {
           childImageSharp {
             fixed(width: 150, height: 150) {
