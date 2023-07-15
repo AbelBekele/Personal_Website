@@ -1,4 +1,12 @@
+[build.environment]
+  NPM_FLAGS = "--version"
+  NODE_VERSION = "16"
+
 [build]
-  publish = "public"
-  command = "npm run build --openssl-legacy-provider"
-  node_version = "16"
+  publish = "dist"
+  command = "npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
