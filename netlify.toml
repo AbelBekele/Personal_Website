@@ -1,3 +1,4 @@
 [build]
   publish = "public"
   command = "npm run build --openssl-legacy-provider"
+  node_version = "16"
